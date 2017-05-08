@@ -7,6 +7,26 @@
     filterData.$inject = ['filterFactory'];
 
     function filterData(filterFactory) {
-        filterFactory.filterList();
+
+        var vm = this;
+        vm.onSubmit = submit;
+
+        init();
+        //////////////////////
+
+        function init() {
+
+        }
+
+        function submit() {
+            filterFactory
+                .forwardFilters({type: vm.filterType, value: vm.filterValue})
+
+        }
+
     }
+
+
+
+
 })()

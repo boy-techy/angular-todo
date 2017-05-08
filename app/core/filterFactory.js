@@ -4,17 +4,24 @@
         .module('app')
         .factory('filterFactory',filterFactory);
 
-    filterFactory.$inject = ['$http'];
+    filterFactory.$inject = ['todoProcess'];
 
-    function filterFactory(http) {
+    function filterFactory(todoProcess) {
+
         var service = {};
-
-        service.filterList = filterList;
+        service.forwardFilters = forwardFilters;
         return service;
 
+        /////////////////
 
-        function filterList() {
-            console.log("Have to do work yet");
+
+
+        function forwardFilters(filters) {
+            todoProcess.updateFilters(filters);
         }
+
+
+
+
     }
 })()
