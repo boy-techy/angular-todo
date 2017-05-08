@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="index.css" rel="stylesheet">
+</head>
+<body>
+<div ng-app="app">
+    <form method="post" class="filter" ng-controller="todoFilter">
+        <table>
+            <tr>
+                <td><label for="searchtype">Select type for filter</label></td>
+                <td>
+                    <input list= "searchtype" type="text" placeholder="title">
+                    <datalist id="searchtype">
+                        <option value="title">Title</option>
+                        <option value="date">Date</option>
+                        <option value="desc">Description</option>
+                        <option value="status">Status</option>
+                    </datalist>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Enter Value:</label></td>
+                <td><input type="text" placeholder="Enter Value for Filter"></td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+
+    <ul ng-controller="todoController as vm">
+        <li><span class="Collapsable">Before Due Date:</span>
+            <ul>
+               <li><span class="Collapsable">Completed</span>
+                   <table>
+                       <tr ng-repeat="complete in vm.pre.complete">
+                           <td>{{complete.title}}</td>
+                           <td>{{complete.date}}</td>
+                           <td>{{complete.desc}}</td>
+                           <td>{{complete.status}}</td>
+                       </tr>
+                   </table>
+               </li>
+
+               <li><span class="Collapsable">Incomplete</span>
+                   <table>
+                       <tr ng-repeat="incomplete in vm.pre.incomplete">
+                           <td>{{incomplete.title}}</td>
+                           <td>{{incomplete.date}}</td>
+                           <td>{{incomplete.desc}}</td>
+                           <td>{{incomplete.status}}</td>
+                       </tr>
+                   </table>
+               </li>
+            </ul>
+        </li>
+        <li><span class="Collapsable">After Due Date:</span>
+            <ul>
+                <li><span class="Collapsable">Completed</span>
+                    <table>
+                        <tr ng-repeat="complete in vm.past.complete">
+                            <td>{{complete.title}}</td>
+                            <td>{{complete.date}}</td>
+                            <td>{{complete.desc}}</td>
+                            <td>{{complete.status}}</td>
+                        </tr>
+                    </table>
+                </li>
+
+                <li><span class="Collapsable">Incomplete</span>
+                    <table>
+                        <tr ng-repeat="incomplete in vm.past.incomplete">
+                            <td>{{incomplete.title}}</td>
+                            <td>{{incomplete.date}}</td>
+                            <td>{{incomplete.desc}}</td>
+                            <td>{{incomplete.status}}</td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<script src="app/vendor/angular.js"></script>
+<script src="app/app.module.js"></script>
+
+   <!--Factory-->
+<script src="app/core/filterFactory.js"></script>
+<script src="app/core/todoFactory.js"></script>
+<script src="app/core/todoProcess.js"></script>
+
+<!--Controllers-->
+<script src="app/view/controller.js"></script>
+<script src="app/view/filterData.js"></script>
+<!--For Toggle List-->
+<script src="app/view/view.js"></script>
+</body>
+</html>
