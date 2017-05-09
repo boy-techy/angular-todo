@@ -8,12 +8,12 @@
 </head>
 <body>
 <div ng-app="app">
-    <form method="post" class="filter" ng-controller="todoFilter">
+    <form class="filter" ng-controller="filterController as vm">
         <table>
-            <tr>
+            <tr>c
                 <td><label for="searchtype">Select type for filter</label></td>
                 <td>
-                    <input list= "searchtype" type="text" placeholder="title">
+                    <input list= "searchtype" type="text" placeholder="title" ng-model = "vm.filterType">
                     <datalist id="searchtype">
                         <option value="title">Title</option>
                         <option value="date">Date</option>
@@ -24,10 +24,11 @@
             </tr>
             <tr>
                 <td><label>Enter Value:</label></td>
-                <td><input type="text" placeholder="Enter Value for Filter"></td>
+                <td><input type="text" placeholder="Enter Value for Filter" ng-model="vm.filterValue"></td>
             </tr>
+            {{vm.data | json}};
         </table>
-        <input type="submit" value="Submit">
+        <input type="button" value="Submit" ng-click="vm.onSubmit()">
     </form>
 
     <ul ng-controller="todoController as vm">
@@ -88,13 +89,12 @@
 <script src="app/app.module.js"></script>
 
    <!--Factory-->
-<script src="app/core/filterFactory.js"></script>
 <script src="app/core/todoFactory.js"></script>
+<script src="app/core/filterCFactory.js"></script>
 <script src="app/core/todoProcess.js"></script>
-
 <!--Controllers-->
 <script src="app/view/controller.js"></script>
-<script src="app/view/filterData.js"></script>
+<script src="app/view/filterController.js"></script>
 <!--For Toggle List-->
 <script src="app/view/view.js"></script>
 </body>

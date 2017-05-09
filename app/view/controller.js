@@ -5,12 +5,32 @@
 
     todoController.$inject = ['todoProcess','$log'];
 
-    function todoController(todoProcess,$log) {
+    function todoController(todoProcess) {
         var vm = this;
 
-        printData();
+        init();
+        ///////////////////
 
-        function printData() {
+
+        function init() {
+            registerOnViewDataUpdateListener();
+            loadInitialData();
+        }
+
+
+        function registerOnViewDataUpdateListener() {
+            todoProcess.registerListeners(todoProcess.events.FILTER, onViewDataUpdate);
+        }
+
+        function onViewDataUpdate(list) {
+
+            console.log(list);
+
+            vm.pre = list.pre;
+            vm.past = list.past;
+        }
+
+        function loadInitialData() {
             todoProcess
                 .getTodo()
                 .then(function (list) {

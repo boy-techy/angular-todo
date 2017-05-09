@@ -10,11 +10,11 @@
         service.gettodoList = gettodoList;
         return service;
 
+
         //////////////////////////////
         function gettodoList() {
             return http.get('/api/data.json')
                 .then(function (response) {
-                    if(response.status === 200)
                         return wrapInTodo(response.data);
                 })
                 .catch(function (err) {
